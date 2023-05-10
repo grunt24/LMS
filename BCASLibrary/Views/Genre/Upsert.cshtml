@@ -1,0 +1,73 @@
+﻿@model GenreVM
+
+@{
+    ViewData["Title"] = "Add Genre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header ml-0 py-3" style="background: #e1dcc5;">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> @(Model.Genre.Id!=0?"Update":"Add") Genre</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-10">
+            <div class="border p-3 mt-4">
+                <input asp-for="Genre.Id" hidden/>
+                        <input asp-for="Genre.Id" hidden />
+                        <input asp-for="Genre.Id" hidden />
+                <div class="mb-3 row">
+                    <label asp-for="Genre.GenreName"></label>
+                    <input asp-for="Genre.GenreName" class="form-control text-dark" autocomplete="off" />
+                            <span asp-validation-for="Genre.GenreName" class="text-danger"></span>
+                </div>
+@*                <div class="mb-3 row">
+                    <label asp-for="Genre.Description" class="ms-2 text-muted"></label>
+                    <textarea asp-for="Genre.Description" class="form-control text-dark" autocomplete="off">
+                    </textarea>
+                </div>*@
+
+
+                <div class="row">
+                    <div class="col-6 col-md-3 border-3">
+                        @if(Model.Genre.Id!=0)
+                        {
+                            <button type="submit" class="btn btn-outline-success w-100">Update</button>
+
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-outline-success w-100">Add</button>
+
+                        }
+
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Genre" asp-action="Index" class="btn btn-secondary w-100">
+                            back to list
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,117 @@
+﻿@model List<Genre>
+
+@{
+    ViewData["Title"] = "Genre List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-white ml-0 py-3">
+        <div class="row">
+            <div class="col-6 text-start">
+                <h2 style="color:#e1dcc5; font-weight: bold; " class=" py-2">Genre List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a id="add" asp-controller="Genre" asp-action="Upsert" class="nav-link">
+                    <i class="bi-plus-circle-fill"></i> 
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body p-4" style="background-color: #f7f9fc;">
+        @*        <div class="col-12 text-end me-3">
+        <a asp-controller="Genre" asp-action="Upsert" class="btn btn-outline-success">
+        <i class="bi-plus-circle"></i>
+        </a>
+        </div>*@
+        <table id="tblData" class="table table-bordered shadow-lg table-striped table-secondary" style="width:100%">
+            <thead>
+                <tr>
+@*                    <th>
+                        Id
+                    </th>*@
+                    <th>
+                        Genre Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            @*            <tbody>
+            @foreach (var item in Model.OrderBy(u => u.Id))
+            {
+            <tr>
+            <td>@item.Id</td>
+            <td>@item.GenreName</td>
+            <td class="text-center me-auto">
+            <div class="w-25 btn-group" role="group">
+            <a asp-controller="Genre" asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-outline-warning mx-1">
+            <i class="bi bi-pencil-square"></i>
+            </a>
+            <a asp-controller="Genre" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+            <i class="bi bi-trash-fill"></i>
+            </a>
+            </div>
+            </td>
+            </tr>
+            }
+            </tbody>*@
+        </table>
+    </div>
+</div>
+
+
+@*<div class="container">
+    <div class="row pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">Genre List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Genre" asp-action="Upsert" class="btn btn-outline-success">
+                <i class="bi-plus-circle"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<table class="table table-bordered shadow-lg table-striped table-secondary">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Genre Name
+            </th>
+            <th class="text-center">
+                Genre Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(u => u.Id))
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.GenreName</td>
+                <td class="text-center me-auto">
+                    <div class="w-25 btn-group" role="group">
+                        <a asp-controller="Genre" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning mx-1">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-controller="Genre" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+@section Scripts{
+    <script src="~/js/genre.js"></script>
+}

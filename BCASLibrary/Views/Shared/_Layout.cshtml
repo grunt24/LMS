@@ -1,0 +1,119 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BCASLibrary.Areas.Identity.Data
+
+@inject SignInManager<LibraryUser> SignInManager
+@inject UserManager<LibraryUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BCAS Library System</title>
+
+    <link rel="stylesheet" href="~/BCASLibrary.styles.css" asp-append-version="true" />
+
+    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">*@
+
+    @*bootstrap icons    *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    @*fav icon*@
+    <link rel="shortcut icon" href="~/img/favicon-16x16.png" type="image/x-icon">
+    @*toastr*@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @*Table*@
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/js/DataTables/datatables.css" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/main-boot.css" />
+
+
+</head>
+<body>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <header id="footer" class="border-top text-light p-2" style="background: #333;">
+            <div class="container text-center">
+                BCAS Library System
+            </div>
+        </header>
+    }
+
+    <header class="sticky-top">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3 "
+             style="background: #e1dcc5;">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-secondary" asp-area="" asp-controller="Home" asp-action="Index">BCAS Library System</a>
+@*                    <a class="navbar-brand" style="cursor: pointer;">
+                        <img class="img-fluid" src="~/img/libraryLogo.png" alt="Library Logo" style="width: 20%; height: 20%; ">
+                    </a>*@
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-lis text-white" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                               aria-expanded="false">Content Management</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Genre">Genre</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Book" disabled>Book</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </nav>
+        }
+    </header>
+    <div id="body" class="container">
+        <main role="main" class="pb-3">
+            <partial name="_Notification" />
+            @RenderBody()
+        </main>
+    </div>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <footer id="footer" class="border-top footer fixed-bottom" style="background: #333; color: #e1dcc5;">
+            <div class="container text-center">
+                Made with <i style="color: red;" class="bi bi-heart-fill"></i> by Brent Jay O. De Leon
+            </div>
+        </footer>
+    }
+
+    <script src="https://cdn.tiny.cloud/1/2idb5iyarmpag8ltnydnnkxdr5jlf8crz9ahhi3x8xaduv10/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,107 @@
+﻿@model BookVM
+
+@{
+    ViewData["Title"] = "Add Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header ml-0 py-3"
+    style="background: #e1dcc5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 style="color: white;" class="py-2"> @(Model.Book.Id != 0 ? "Update" : "Add") Book</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-10">
+                    <div class="border p-3 mt-4">
+                        <input asp-for="Book.Id" hidden />
+                        <input asp-for="Book.Id" hidden />
+                        <input asp-for="Book.ImageUrl" hidden />
+                        <div class="mb-3 row">
+                            <label asp-for="Book.Title"></label>
+                            <input asp-for="Book.Title" class="form-control text-dark" autocomplete="off" />
+                            <span asp-validation-for="Book.Title" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row">
+                            <label asp-for="Book.Author"></label>
+                            <input asp-for="Book.Author" class="form-control text-dark" autocomplete="off" />
+                            <span asp-validation-for="Book.Author" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row">
+                            <label asp-for="Book.Description" class="ms-2 text-muted"></label>
+                            <textarea asp-for="Book.Description" class="form-control text-dark" autocomplete="off">
+                    </textarea>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="Book.Isbn"></label>
+                            <input asp-for="Book.Isbn" class="form-control text-dark" autocomplete="off" />
+                            <span asp-validation-for="Book.Isbn" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row">
+                            <label asp-for="Book.GenreId"></label>
+                            <select asp-for="Book.GenreId" asp-items="@Model.GenreList" class="form-select text-dark" autocomplete="off">
+                                <option disabled selected>---Select Genre--</option>
+                            </select>
+                            <span asp-validation-for="Book.GenreId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3 row">
+                            <label asp-for="Book.ImageUrl"></label>
+                            <input type="file" name="file" class="form-control text-dark" autocomplete="off" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 col-md-3 border-3">
+                                @if (Model.Book.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-outline-success w-100">Update</button>
+
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-outline-success w-100">Add</button>
+
+                                }
+
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Book" asp-action="Index" class="btn btn-secondary w-100">
+                                    back to list
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-2">
+                    <img src="@Model.Book.ImageUrl" width="100%"
+                         style="border-radius:5px; border:1px solid #bbb9b9" />
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            auto_p: false,
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

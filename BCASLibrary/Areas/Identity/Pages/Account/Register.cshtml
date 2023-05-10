@@ -1,0 +1,53 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+}
+
+<form class="p-4" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <a style="cursor: pointer;">
+        <img class="img-fluid mx-auto d-block mt-4 mb-2" src="~/img/libraryLogo.png" alt="Library Logo" style="width: 40%; height: 40%; ">
+    </a>
+    <h5 class="text-center"> <span>Create</span> your account now to see <br />different types of books.</h5>
+    <hr />
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="row m-3 ">
+        <div class="col-6">
+            <div class="form-group mb-3 shadow-sm bg-body-tertiary rounded">
+                <input asp-for="Input.FirstName" class="form-control" placeholder="First Name" autocomplete="on" aria-required="true" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div id="form-group" class="form-group mb-3 shadow-sm bg-body-tertiary rounded">
+                <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" autocomplete="on" aria-required="true" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group  mb-3 shadow-sm bg-body-tertiary rounded">
+                <input asp-for="Input.Email" class="form-control" placeholder="Email" autocomplete="on" aria-required="true" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group mb-3 shadow-sm bg-body-tertiary rounded">
+                <input type="password" asp-for="Input.Password" class="form-control" placeholder="Password" autocomplete="on" aria-required="true" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group mb-3 shadow-sm bg-body-tertiary rounded">
+                <input type="password" asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" autocomplete="on" aria-required="true" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button id="registerSubmit" type="submit" class="w-100 btn text-white">Register</button>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
